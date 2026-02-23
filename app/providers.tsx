@@ -14,6 +14,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
             "--coolers-blue-2": theme.palette.coolersBlue2.main,
             "--coolers-green-1": theme.palette.coolersGreen1.main,
             "--coolers-green-2": theme.palette.coolersGreen2.main,
+            "--coolers-neutral": theme.palette.coolersNeutral.main,
+            "--coolers-neutral-inverted":
+              theme.palette.coolersNeutralInverted.main,
           },
         }}
       />

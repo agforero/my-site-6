@@ -20,8 +20,10 @@ const COOLERS_BLUE_1 = "#064789";
 const COOLERS_BLUE_2 = "#427aa1";
 const COOLERS_GREEN_1 = "#679436";
 const COOLERS_GREEN_2 = "#a5be00";
+const COOLERS_NEUTRAL = "#ebf2fa";
+export const COOLERS_NEUTRAL_INVERTED = "#140d05";
 
-const { palette } = createTheme();
+const { palette, spacing } = createTheme();
 const { augmentColor } = palette;
 const createColor = (mainColor: string) =>
   augmentColor({ color: { main: mainColor } });
@@ -32,12 +34,16 @@ declare module "@mui/material/styles" {
     coolersBlue2: Palette["primary"];
     coolersGreen1: Palette["primary"];
     coolersGreen2: Palette["primary"];
+    coolersNeutral: Palette["primary"];
+    coolersNeutralInverted: Palette["primary"];
   }
   interface PaletteOptions {
     coolersBlue1?: PaletteOptions["primary"];
     coolersBlue2?: PaletteOptions["primary"];
     coolersGreen1?: PaletteOptions["primary"];
     coolersGreen2?: PaletteOptions["primary"];
+    coolersNeutral?: PaletteOptions["primary"];
+    coolersNeutralInverted?: PaletteOptions["primary"];
   }
 }
 
@@ -47,12 +53,17 @@ declare module "@mui/material/Button" {
     coolersBlue2: true;
     coolersGreen1: true;
     coolersGreen2: true;
+    coolersNeutral: true;
+    coolersNeutralInverted: true;
   }
 }
 
 export const theme = createTheme({
   typography: {
-    fontFamily: "system-ui, sans-serif",
+    allVariants: {
+      fontFamily: "system-ui, sans-serif",
+      color: COOLERS_NEUTRAL_INVERTED,
+    },
 
     h1: { fontFamily: averiaSerifLibre.style.fontFamily },
     h2: { fontFamily: averiaSerifLibre.style.fontFamily },
@@ -77,5 +88,19 @@ export const theme = createTheme({
     coolersBlue2: createColor(COOLERS_BLUE_2),
     coolersGreen1: createColor(COOLERS_GREEN_1),
     coolersGreen2: createColor(COOLERS_GREEN_2),
+    coolersNeutral: createColor(COOLERS_NEUTRAL),
+    coolersNeutralInverted: createColor(COOLERS_NEUTRAL_INVERTED),
+    background: {
+      default: COOLERS_NEUTRAL,
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: spacing(2),
+        },
+      },
+    },
   },
 });
