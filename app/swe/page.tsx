@@ -19,12 +19,11 @@ export default function SWEPage() {
     const last = sweWorkExperience.at(-1);
     return last?.startDate
       ? formatDuration(last.startDate, new Date(now))
-      : "0 seconds.";
+      : "0 seconds";
   }
 
   return (
-    <Container
-      maxWidth="md"
+    <Box
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -33,60 +32,62 @@ export default function SWEPage() {
       }}
     >
       <WebsiteHeaderBanner />
-      <Box
-        sx={{
-          overflowX: "auto",
-          py: 3,
-          display: "flex",
-          flexDirection: "column",
-          gap: 4,
-        }}
-      >
-        <Box>
-          <Typography variant="h5" color="coolersBlue1">
-            About Me
-          </Typography>
-          <Typography variant="body1" sx={{ py: 1, whiteSpace: "pre-line" }}>
-            {sweSummary}
-          </Typography>
-        </Box>
-        <Divider />
-        <Box>
-          <Typography variant="h5" color="coolersBlue1">
-            Languages and technologies
-          </Typography>
-          <List sx={{ listStyleType: "disc", pl: 4 }}>
-            {sweLanguagesAndTechnologies.map((item, idx) => (
-              <Typography key={idx} component="li">
-                {item}
-              </Typography>
-            ))}
-          </List>
-        </Box>
-        <Divider />
-        <Box>
-          <Typography variant="h5" color="coolersBlue1">
-            Work experience
-          </Typography>
-          <Typography variant="caption">
-            I{"'"}ve been coding professionally for {diffToHHMMSS()}, minus
-            weekends and holidays.
-          </Typography>
-          <StepList
-            steps={sweWorkExperience}
-            getIconFromIdx={(idx) =>
-              idx === 0 || idx === 1 ? <Work /> : <WorkOutline />
-            }
-          />
-        </Box>
-        <Divider />
-        <Box>
-          <Typography variant="h5" color="coolersBlue1">
-            Education
-          </Typography>
-          <StepList steps={sweEducation} />
-        </Box>
+      <Box sx={{ overflowX: "auto", flex: 1 }}>
+        <Container
+          maxWidth="md"
+          sx={{
+            py: 3,
+            display: "flex",
+            flexDirection: "column",
+            gap: 4,
+          }}
+        >
+          <Box>
+            <Typography variant="h5" color="coolersBlue1">
+              About Me
+            </Typography>
+            <Typography variant="body1" sx={{ py: 1, whiteSpace: "pre-line" }}>
+              {sweSummary}
+            </Typography>
+          </Box>
+          <Divider />
+          <Box>
+            <Typography variant="h5" color="coolersBlue1">
+              Languages and technologies
+            </Typography>
+            <List sx={{ listStyleType: "disc", pl: 4 }}>
+              {sweLanguagesAndTechnologies.map((item, idx) => (
+                <Typography key={idx} component="li">
+                  {item}
+                </Typography>
+              ))}
+            </List>
+          </Box>
+          <Divider />
+          <Box>
+            <Typography variant="h5" color="coolersBlue1">
+              Work experience
+            </Typography>
+            <Typography variant="caption">
+              I{"'"}ve been coding professionally for {diffToHHMMSS()}, minus
+              weekends and holidays.
+            </Typography>
+            <StepList
+              steps={sweWorkExperience}
+              getIconFromIdx={(idx) =>
+                idx === 0 || idx === 1 ? <Work /> : <WorkOutline />
+              }
+            />
+          </Box>
+          <Divider />
+          <Box>
+            <Typography variant="h5" color="coolersBlue1">
+              Education
+            </Typography>
+            <StepList steps={sweEducation} />
+          </Box>
+        </Container>
       </Box>
-    </Container>
+    </Box>
   );
 }
