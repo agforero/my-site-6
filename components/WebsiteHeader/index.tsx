@@ -139,6 +139,42 @@ function WebsiteHeaderMedium({ pathname }: { pathname: string }) {
 }
 
 function WebsiteHeaderLarge({ pathname }: { pathname: string }) {
+  const MemoizedSWEButton = useMemo(
+    () => (
+      <Button
+        variant={pathname.startsWith(SWE_URL_ROOT) ? "contained" : "outlined"}
+        component={Link}
+        href={SWE_URL_ROOT}
+        disableElevation
+        color="coolersBlue1"
+        startIcon={<ArrowBack />}
+        size="large"
+      >
+        Software engineer
+      </Button>
+    ),
+    [pathname],
+  );
+
+  const MemoizedPhotographerButton = useMemo(
+    () => (
+      <Button
+        variant={
+          pathname.startsWith(PHOTOGRAPHY_URL_ROOT) ? "contained" : "outlined"
+        }
+        component={Link}
+        href={PHOTOGRAPHY_URL_ROOT}
+        disableElevation
+        color="coolersGreen1"
+        endIcon={<ArrowForward />}
+        size="large"
+      >
+        Photographer
+      </Button>
+    ),
+    [pathname],
+  );
+
   return (
     <Box
       sx={{
@@ -160,52 +196,24 @@ function WebsiteHeaderLarge({ pathname }: { pathname: string }) {
       <Box
         sx={{
           display: "flex",
+          flexDirection: { xs: "column", sm: "row" },
           gap: 2.5,
           justifyContent: "center",
+          alignItems: "center",
           width: "100%",
         }}
       >
-        <Box>
-          <Button
-            variant={
-              pathname.startsWith(SWE_URL_ROOT) ? "contained" : "outlined"
-            }
-            component={Link}
-            href={SWE_URL_ROOT}
-            disableElevation
-            color="coolersBlue1"
-            startIcon={<ArrowBack />}
-            size="large"
-          >
-            Software engineer
-          </Button>
-        </Box>
+        <Box>{MemoizedSWEButton}</Box>
         <Box
           sx={{
-            display: "flex",
+            display: { xs: "none", sm: "flex" },
             justifyContent: "center",
             alignItems: "center",
           }}
         >
           <Typography>and</Typography>
         </Box>
-        <Box>
-          <Button
-            variant={
-              pathname.startsWith(PHOTOGRAPHY_URL_ROOT)
-                ? "contained"
-                : "outlined"
-            }
-            component={Link}
-            href={PHOTOGRAPHY_URL_ROOT}
-            disableElevation
-            color="coolersGreen1"
-            endIcon={<ArrowForward />}
-            size="large"
-          >
-            Photographer
-          </Button>
-        </Box>
+        <Box>{MemoizedPhotographerButton}</Box>
       </Box>
     </Box>
   );
