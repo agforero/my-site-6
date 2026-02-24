@@ -3,6 +3,13 @@
   --mondrian-red: #ae3625;
   --mondrian-blue: #466bbc;
   --mondrian-yellow: #ebd42c;
+  --cool-gradient: linear-gradient(
+    135deg,
+    var(--coolers-blue-1),
+    var(--coolers-blue-2),
+    var(--coolers-green-1),
+    var(--coolers-green-2)
+  );
 }
 
 html,

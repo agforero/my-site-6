@@ -1,6 +1,6 @@
 // theme.ts
 import { createTheme } from "@mui/material/styles";
-import { Averia_Serif_Libre, Karla } from "next/font/google";
+import { Averia_Serif_Libre, Grenze_Gotisch, Karla } from "next/font/google";
 
 export const averiaSerifLibre = Averia_Serif_Libre({
   subsets: ["latin"],
@@ -14,6 +14,13 @@ export const karla = Karla({
   weight: ["400", "500", "700"],
   display: "swap",
   variable: "--font-body",
+});
+
+export const grenzeGotisch = Grenze_Gotisch({
+  subsets: ["latin"],
+  weight: "600",
+  display: "swap",
+  variable: "--font-cursive",
 });
 
 const COOLERS_BLUE_1 = "#064789";

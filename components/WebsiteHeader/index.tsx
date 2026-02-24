@@ -1,16 +1,17 @@
-import { theme } from "@/app/theme";
+import { grenzeGotisch, theme } from "@/app/theme";
 import { PHOTOGRAPHY_URL_ROOT, SWE_URL_ROOT } from "@/utils/constants";
 import { ArrowBack, ArrowForward, Camera, Terminal } from "@mui/icons-material";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
 
 interface WebsiteHeaderProps {
   variant: "large" | "medium";
 }
 
 function WebsiteHeaderMedium({ pathname }: { pathname: string }) {
+  const greaterThanMid = useMediaQuery(theme.breakpoints.up("md"));
   const ref = useRef<HTMLDivElement>(null);
   const [biggerButtonWidth, setBiggerButtonWidth] = useState<number>(0);
   useLayoutEffect(() => {
@@ -18,11 +19,11 @@ function WebsiteHeaderMedium({ pathname }: { pathname: string }) {
       const width = ref.current.offsetWidth;
       setBiggerButtonWidth(width);
     }
-  }, []);
+  }, [greaterThanMid]);
 
-  return (
-    <Box sx={{ display: "flex", gap: 4, alignItems: "center" }}>
-      <Box ref={ref}>
+  const MemoizedSWEButton = useMemo(
+    () => (
+      <Box ref={ref} sx={{ marginTop: { xs: 0, md: 1 } }}>
         <Button
           variant={pathname.startsWith(SWE_URL_ROOT) ? "contained" : "outlined"}
           component={Link}
@@ -32,23 +33,21 @@ function WebsiteHeaderMedium({ pathname }: { pathname: string }) {
           size="small"
           startIcon={<Terminal />}
         >
-          Software engineer
+          {greaterThanMid ? "Software engineer" : "Coding"}
         </Button>
       </Box>
-      <Link href="/" style={{ textDecoration: "none" }}>
-        <Box
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Typography variant="h3" className="gradient-text">
-            Agustin Forero
-          </Typography>
-        </Box>
-      </Link>
-      <Box sx={{ width: biggerButtonWidth }}>
+    ),
+    [pathname, greaterThanMid],
+  );
+
+  const MemoizedPhotographyButton = useMemo(
+    () => (
+      <Box
+        sx={{
+          marginTop: { xs: 0, md: 1 },
+          width: { xs: undefined, md: biggerButtonWidth },
+        }}
+      >
         <Button
           variant={
             pathname.startsWith(PHOTOGRAPHY_URL_ROOT) ? "contained" : "outlined"
@@ -60,25 +59,113 @@ function WebsiteHeaderMedium({ pathname }: { pathname: string }) {
           size="small"
           endIcon={<Camera />}
         >
-          Photographer
+          {greaterThanMid ? "Photographer" : "Photography"}
         </Button>
       </Box>
-    </Box>
+    ),
+    [pathname, greaterThanMid, biggerButtonWidth],
+  );
+
+  return (
+    <>
+      <Box
+        sx={{
+          display: { xs: "flex", md: "none" },
+          flexDirection: "column",
+          gap: { xs: 0.5, sm: 1 },
+          alignItems: "center",
+        }}
+      >
+        <Box>
+          <Link href="/" style={{ textDecoration: "none" }}>
+            <Box
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Typography
+                variant="h3"
+                className="gradient-text"
+                fontFamily={grenzeGotisch.style.fontFamily}
+              >
+                Agustin Forero
+              </Typography>
+            </Box>
+          </Link>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: { xs: 0.5, sm: 1 },
+          }}
+        >
+          {MemoizedSWEButton}
+          {MemoizedPhotographyButton}
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          display: { xs: "none", md: "flex" },
+          gap: 4,
+          alignItems: "center",
+        }}
+      >
+        {MemoizedSWEButton}
+        <Link href="/" style={{ textDecoration: "none" }}>
+          <Box
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Typography
+              variant="h3"
+              className="gradient-text"
+              fontFamily={grenzeGotisch.style.fontFamily}
+            >
+              Agustin Forero
+            </Typography>
+          </Box>
+        </Link>
+        {MemoizedPhotographyButton}
+      </Box>
+    </>
   );
 }
 
 function WebsiteHeaderLarge({ pathname }: { pathname: string }) {
   return (
-    <Box sx={{ width: "fit-content" }}>
-      <Typography
-        variant="h1"
-        className="gradient-text"
-        style={{ marginBottom: theme.spacing(1) }}
+    <Box
+      sx={{
+        width: "100%",
+      }}
+    >
+      <Box sx={{ textAlign: "center" }}>
+        <Typography
+          variant="h1"
+          className="gradient-text"
+          fontFamily={grenzeGotisch.style.fontFamily}
+          style={{
+            marginBottom: theme.spacing(1),
+          }}
+        >
+          Agustin Forero
+        </Typography>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          gap: 2.5,
+          justifyContent: "center",
+          width: "100%",
+        }}
       >
-        Agustin Forero
-      </Typography>
-      <Box sx={{ display: "flex", gap: 2.5 }}>
-        <Box sx={{ flex: 1, display: "flex", justifyContent: "right" }}>
+        <Box>
           <Button
             variant={
               pathname.startsWith(SWE_URL_ROOT) ? "contained" : "outlined"
@@ -95,7 +182,6 @@ function WebsiteHeaderLarge({ pathname }: { pathname: string }) {
         </Box>
         <Box
           sx={{
-            flex: 0,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -103,7 +189,7 @@ function WebsiteHeaderLarge({ pathname }: { pathname: string }) {
         >
           <Typography>and</Typography>
         </Box>
-        <Box sx={{ flex: 1, display: "flex", justifyContent: "left" }}>
+        <Box>
           <Button
             variant={
               pathname.startsWith(PHOTOGRAPHY_URL_ROOT)
