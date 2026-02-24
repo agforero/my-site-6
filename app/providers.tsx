@@ -1,6 +1,7 @@
 "use client";
 
-import { ThemeProvider, CssBaseline, GlobalStyles } from "@mui/material";
+import { Z_INDEX } from "@/utils/constants";
+import { CssBaseline, GlobalStyles, ThemeProvider } from "@mui/material";
 import { theme } from "./theme";
 
 export function Providers({ children }: { children: React.ReactNode }) {
@@ -17,6 +18,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
             "--coolers-neutral": theme.palette.coolersNeutral.main,
             "--coolers-neutral-inverted":
               theme.palette.coolersNeutralInverted.main,
+            "--z-index-website-header-banner": Z_INDEX.WEBSITE_HEADER_BANNER,
           },
         }}
       />

@@ -58,10 +58,32 @@ declare module "@mui/material/Button" {
   }
 }
 
+declare module "@mui/material/Typography" {
+  interface TypographyPropsColorOverrides {
+    coolersBlue1: true;
+    coolersBlue2: true;
+    coolersGreen1: true;
+    coolersGreen2: true;
+    coolersNeutral: true;
+    coolersNeutralInverted: true;
+  }
+}
+
+declare module "@mui/material/SvgIcon" {
+  interface SvgIconPropsColorOverrides {
+    coolersBlue1: true;
+    coolersBlue2: true;
+    coolersGreen1: true;
+    coolersGreen2: true;
+    coolersNeutral: true;
+    coolersNeutralInverted: true;
+  }
+}
+
 export const theme = createTheme({
   typography: {
     allVariants: {
-      fontFamily: "system-ui, sans-serif",
+      fontFamily: karla.style.fontFamily,
       color: COOLERS_NEUTRAL_INVERTED,
     },
 

@@ -1,8 +1,8 @@
 // app/layout.tsx
 import type { Metadata } from "next";
+import Image from "next/image";
 import "./globals.css";
 import { Providers } from "./providers";
-import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Agustin Forero",
