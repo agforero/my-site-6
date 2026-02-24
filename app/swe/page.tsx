@@ -19,7 +19,7 @@ export default function SWEPage() {
     const last = sweWorkExperience.at(-1);
     return last?.startDate
       ? formatDuration(last.startDate, new Date(now))
-      : "0 seconds";
+      : "0 seconds.";
   }
 
   return (
