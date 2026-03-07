@@ -1,4 +1,5 @@
 import { StepListItem } from "@/components/StepList";
+import { Avatar } from "@mui/material";
 import Image from "next/image";
 
 export const sweSummary: string =
@@ -25,12 +26,14 @@ export const sweEducation: StepListItem[] = [
     startDate: new Date(2021, 7),
     endDate: new Date(2022, 5),
     icon: (
-      <Image
-        src="/cornell.svg"
-        width={24}
-        height={24}
-        alt="Cornell University logo"
-      />
+      <Avatar sx={{ height: 24, width: 24 }}>
+        <Image
+          src="/cornell.svg"
+          width={22}
+          height={22}
+          alt="Cornell University logo"
+        />
+      </Avatar>
     ),
   },
   {
@@ -39,12 +42,14 @@ export const sweEducation: StepListItem[] = [
     startDate: new Date(2017, 7),
     endDate: new Date(2021, 5),
     icon: (
-      <Image
-        src="/stolaf.svg"
-        width={24}
-        height={24}
-        alt="St. Olaf College logo"
-      />
+      <Avatar sx={{ height: 24, width: 24 }}>
+        <Image
+          src="/stolaf.svg"
+          width={22}
+          height={22}
+          alt="St. Olaf College logo"
+        />
+      </Avatar>
     ),
   },
 ];

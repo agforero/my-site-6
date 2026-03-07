@@ -6,6 +6,7 @@ import { formatDuration } from "@/utils/formatDuration";
 import { Work, WorkOutline } from "@mui/icons-material";
 import { Box, Container, Divider, List, Typography } from "@mui/material";
 import { useState } from "react";
+import { theme } from "../theme";
 import {
   sweEducation,
   sweLanguagesAndTechnologies,
@@ -50,7 +51,9 @@ export default function SWEPage() {
               {sweSummary}
             </Typography>
           </Box>
-          <Divider />
+          <Divider
+            sx={{ backgroundColor: theme.palette.coolersNeutral.main }}
+          />
           <Box>
             <Typography variant="h5" color="coolersBlue1">
               Languages and technologies
@@ -63,7 +66,9 @@ export default function SWEPage() {
               ))}
             </List>
           </Box>
-          <Divider />
+          <Divider
+            sx={{ backgroundColor: theme.palette.coolersNeutral.main }}
+          />
           <Box>
             <Typography variant="h5" color="coolersBlue1">
               Work experience
@@ -79,7 +84,9 @@ export default function SWEPage() {
               }
             />
           </Box>
-          <Divider />
+          <Divider
+            sx={{ backgroundColor: theme.palette.coolersNeutral.main }}
+          />
           <Box>
             <Typography variant="h5" color="coolersBlue1">
               Education

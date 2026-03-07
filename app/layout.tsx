@@ -1,4 +1,5 @@
 // app/layout.tsx
+import { Avatar } from "@mui/material";
 import type { Metadata } from "next";
 import Image from "next/image";
 import "./globals.css";
@@ -21,35 +22,44 @@ export default function RootLayout({
           <div className="layout">
             <main>{children}</main>
             <footer className="footer">
+              {/* TODO: add Toolbar here */}
               <div className="footer-icon-container">
-                <Image
-                  src="/email.svg"
-                  alt="Send email"
-                  height={20}
-                  width={20}
-                  priority={false}
-                />
-                <Image
-                  src="/linkedin.svg"
-                  alt="LinkedIn profile"
-                  height={20}
-                  width={20}
-                  priority={false}
-                />
-                <Image
-                  src="/github.svg"
-                  alt="GitHub profile"
-                  height={20}
-                  width={20}
-                  priority={false}
-                />
-                <Image
-                  src="/flickr.svg"
-                  alt="Flickr profile"
-                  height={20}
-                  width={20}
-                  priority={false}
-                />
+                <Avatar sx={{ height: 24, width: 24 }}>
+                  <Image
+                    src="/email.svg"
+                    alt="Send email"
+                    height={18}
+                    width={18}
+                    priority={false}
+                  />
+                </Avatar>
+                <Avatar sx={{ height: 24, width: 24 }}>
+                  <Image
+                    src="/linkedin.svg"
+                    alt="LinkedIn profile"
+                    height={14}
+                    width={14}
+                    priority={false}
+                  />
+                </Avatar>
+                <Avatar sx={{ height: 24, width: 24 }}>
+                  <Image
+                    src="/github.svg"
+                    alt="GitHub profile"
+                    height={20}
+                    width={20}
+                    priority={false}
+                  />
+                </Avatar>
+                <Avatar sx={{ height: 24, width: 24 }}>
+                  <Image
+                    src="/flickr.svg"
+                    alt="Flickr profile"
+                    height={20}
+                    width={20}
+                    priority={false}
+                  />
+                </Avatar>
               </div>
             </footer>
           </div>

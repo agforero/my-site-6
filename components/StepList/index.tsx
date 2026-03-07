@@ -38,7 +38,7 @@ export default function StepList({
           >
             <Typography variant="h6" fontFamily={karla.style.fontFamily}>
               {step.label}{" "}
-              <span style={{ color: theme.palette.text.secondary }}>
+              <span style={{ color: theme.palette.coolersNeutral.main }}>
                 (
                 {step.startDate.toLocaleDateString("en-US", {
                   month: "2-digit",

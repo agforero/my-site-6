@@ -28,7 +28,8 @@ const COOLERS_BLUE_2 = "#427aa1";
 const COOLERS_GREEN_1 = "#679436";
 const COOLERS_GREEN_2 = "#a5be00";
 const COOLERS_NEUTRAL = "#ebf2fa";
-export const COOLERS_NEUTRAL_INVERTED = "#140d05";
+const COOLERS_NEUTRAL_SECONDARY = "#a0a0a0";
+const COOLERS_NEUTRAL_INVERTED = "#101010";
 
 const { palette, spacing } = createTheme();
 const { augmentColor } = palette;
@@ -42,6 +43,7 @@ declare module "@mui/material/styles" {
     coolersGreen1: Palette["primary"];
     coolersGreen2: Palette["primary"];
     coolersNeutral: Palette["primary"];
+    coolersNeutralSecondary: Palette["primary"];
     coolersNeutralInverted: Palette["primary"];
   }
   interface PaletteOptions {
@@ -50,6 +52,7 @@ declare module "@mui/material/styles" {
     coolersGreen1?: PaletteOptions["primary"];
     coolersGreen2?: PaletteOptions["primary"];
     coolersNeutral?: PaletteOptions["primary"];
+    coolersNeutralSecondary?: PaletteOptions["primary"];
     coolersNeutralInverted?: PaletteOptions["primary"];
   }
 }
@@ -91,7 +94,7 @@ export const theme = createTheme({
   typography: {
     allVariants: {
       fontFamily: karla.style.fontFamily,
-      color: COOLERS_NEUTRAL_INVERTED,
+      color: COOLERS_NEUTRAL,
     },
 
     h1: { fontFamily: averiaSerifLibre.style.fontFamily },
@@ -118,9 +121,10 @@ export const theme = createTheme({
     coolersGreen1: createColor(COOLERS_GREEN_1),
     coolersGreen2: createColor(COOLERS_GREEN_2),
     coolersNeutral: createColor(COOLERS_NEUTRAL),
+    coolersNeutralSecondary: createColor(COOLERS_NEUTRAL_SECONDARY),
     coolersNeutralInverted: createColor(COOLERS_NEUTRAL_INVERTED),
     background: {
-      default: COOLERS_NEUTRAL,
+      default: COOLERS_NEUTRAL_INVERTED,
     },
   },
   components: {

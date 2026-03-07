@@ -12,7 +12,7 @@ export default function WebsiteHeaderBanner() {
         display: "flex",
         justifyContent: "center",
         py: 2,
-        boxShadow: `0px ${BANNER_SHADOW_HEIGHT}px 10px ${theme.palette.coolersNeutral.main}`,
+        boxShadow: `0px ${BANNER_SHADOW_HEIGHT}px 10px ${theme.palette.coolersNeutralInverted.main}`,
         zIndex: Z_INDEX.WEBSITE_HEADER_BANNER,
         flex: 0,
       }}
