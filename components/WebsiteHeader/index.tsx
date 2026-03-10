@@ -1,4 +1,4 @@
-import { grenzeGotisch, theme } from "@/app/theme";
+import { majorMonoDisplay, theme } from "@/app/theme";
 import { PHOTOGRAPHY_URL_ROOT, SWE_URL_ROOT } from "@/utils/constants";
 import { ArrowBack, ArrowForward, Camera, Terminal } from "@mui/icons-material";
 import { Box, Button, Typography, useMediaQuery } from "@mui/material";
@@ -88,7 +88,7 @@ function WebsiteHeaderMedium({ pathname }: { pathname: string }) {
               <Typography
                 variant="h3"
                 className="gradient-text"
-                fontFamily={grenzeGotisch.style.fontFamily}
+                fontFamily={majorMonoDisplay.style.fontFamily}
               >
                 Agustin Forero
               </Typography>
@@ -126,7 +126,7 @@ function WebsiteHeaderMedium({ pathname }: { pathname: string }) {
             <Typography
               variant="h3"
               className="gradient-text"
-              fontFamily={grenzeGotisch.style.fontFamily}
+              fontFamily={majorMonoDisplay.style.fontFamily}
             >
               Agustin Forero
             </Typography>
@@ -185,9 +185,10 @@ function WebsiteHeaderLarge({ pathname }: { pathname: string }) {
         <Typography
           variant="h1"
           className="gradient-text"
-          fontFamily={grenzeGotisch.style.fontFamily}
+          fontFamily={majorMonoDisplay.style.fontFamily}
           style={{
             marginBottom: theme.spacing(1),
+            fontSize: "clamp(2.5rem, 10vw, 4rem)",
           }}
         >
           Agustin Forero

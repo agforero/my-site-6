@@ -1,4 +1,4 @@
-import { karla, theme } from "@/app/theme";
+import { spaceMono, theme } from "@/app/theme";
 import {
   Step,
   StepContent,
@@ -36,9 +36,9 @@ export default function StepList({
               justifyContent: "space-between",
             }}
           >
-            <Typography variant="h6" fontFamily={karla.style.fontFamily}>
+            <Typography variant="h6" fontFamily={spaceMono.style.fontFamily}>
               {step.label}{" "}
-              <span style={{ color: theme.palette.coolersNeutral.main }}>
+              <span style={{ color: theme.palette.coolersNeutral.dark }}>
                 (
                 {step.startDate.toLocaleDateString("en-US", {
                   month: "2-digit",

@@ -1,35 +1,39 @@
 // theme.ts
 import { createTheme } from "@mui/material/styles";
-import { Averia_Serif_Libre, Grenze_Gotisch, Karla } from "next/font/google";
+import { Geist, Major_Mono_Display, Space_Mono } from "next/font/google";
 
-export const averiaSerifLibre = Averia_Serif_Libre({
+// body
+export const geist = Geist({
   subsets: ["latin"],
-  weight: ["300", "400", "700"],
+  weight: "400",
   display: "swap",
-  variable: "--font-heading",
+  variable: "--font-sans",
 });
 
-export const karla = Karla({
+// headers
+export const spaceMono = Space_Mono({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "700"],
   display: "swap",
-  variable: "--font-body",
+  variable: "--font-mono",
 });
 
-export const grenzeGotisch = Grenze_Gotisch({
+// main title
+export const majorMonoDisplay = Major_Mono_Display({
   subsets: ["latin"],
-  weight: "600",
+  weight: "400",
   display: "swap",
   variable: "--font-cursive",
 });
 
-const COOLERS_BLUE_1 = "#064789";
+const COOLERS_BLUE_1 = "#107deb";
 const COOLERS_BLUE_2 = "#427aa1";
 const COOLERS_GREEN_1 = "#679436";
 const COOLERS_GREEN_2 = "#a5be00";
 const COOLERS_NEUTRAL = "#ebf2fa";
 const COOLERS_NEUTRAL_SECONDARY = "#a0a0a0";
 const COOLERS_NEUTRAL_INVERTED = "#101010";
+const COOLERS_NEUTRAL_INVERTED_SECONDARY = "#161616";
 
 const { palette, spacing } = createTheme();
 const { augmentColor } = palette;
@@ -45,6 +49,7 @@ declare module "@mui/material/styles" {
     coolersNeutral: Palette["primary"];
     coolersNeutralSecondary: Palette["primary"];
     coolersNeutralInverted: Palette["primary"];
+    coolersNeutralInvertedSecondary: Palette["primary"];
   }
   interface PaletteOptions {
     coolersBlue1?: PaletteOptions["primary"];
@@ -54,6 +59,7 @@ declare module "@mui/material/styles" {
     coolersNeutral?: PaletteOptions["primary"];
     coolersNeutralSecondary?: PaletteOptions["primary"];
     coolersNeutralInverted?: PaletteOptions["primary"];
+    coolersNeutralInvertedSecondary?: PaletteOptions["primary"];
   }
 }
 
@@ -93,26 +99,26 @@ declare module "@mui/material/SvgIcon" {
 export const theme = createTheme({
   typography: {
     allVariants: {
-      fontFamily: karla.style.fontFamily,
+      fontFamily: spaceMono.style.fontFamily,
       color: COOLERS_NEUTRAL,
     },
 
-    h1: { fontFamily: averiaSerifLibre.style.fontFamily },
-    h2: { fontFamily: averiaSerifLibre.style.fontFamily },
-    h3: { fontFamily: averiaSerifLibre.style.fontFamily },
-    h4: { fontFamily: averiaSerifLibre.style.fontFamily },
-    h5: { fontFamily: averiaSerifLibre.style.fontFamily },
-    h6: { fontFamily: averiaSerifLibre.style.fontFamily },
+    h1: { fontFamily: spaceMono.style.fontFamily },
+    h2: { fontFamily: spaceMono.style.fontFamily },
+    h3: { fontFamily: spaceMono.style.fontFamily },
+    h4: { fontFamily: spaceMono.style.fontFamily },
+    h5: { fontFamily: spaceMono.style.fontFamily },
+    h6: { fontFamily: spaceMono.style.fontFamily },
 
     body1: {
-      fontFamily: karla.style.fontFamily,
+      fontFamily: geist.style.fontFamily,
     },
     body2: {
-      fontFamily: karla.style.fontFamily,
+      fontFamily: geist.style.fontFamily,
     },
 
     button: {
-      fontFamily: karla.style.fontFamily,
+      fontFamily: spaceMono.style.fontFamily,
     },
   },
   palette: {
@@ -123,6 +129,9 @@ export const theme = createTheme({
     coolersNeutral: createColor(COOLERS_NEUTRAL),
     coolersNeutralSecondary: createColor(COOLERS_NEUTRAL_SECONDARY),
     coolersNeutralInverted: createColor(COOLERS_NEUTRAL_INVERTED),
+    coolersNeutralInvertedSecondary: createColor(
+      COOLERS_NEUTRAL_INVERTED_SECONDARY,
+    ),
     background: {
       default: COOLERS_NEUTRAL_INVERTED,
     },
@@ -131,7 +140,7 @@ export const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: spacing(2),
+          borderRadius: spacing(0.5),
         },
       },
     },

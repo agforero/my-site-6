@@ -1,5 +1,5 @@
 import { theme } from "@/app/theme";
-import { BANNER_SHADOW_HEIGHT, Z_INDEX } from "@/utils/constants";
+import { Z_INDEX } from "@/utils/constants";
 import { Box } from "@mui/material";
 import WebsiteHeader from "../WebsiteHeader";
 
@@ -11,13 +11,25 @@ export default function WebsiteHeaderBanner() {
         width: "100%",
         display: "flex",
         justifyContent: "center",
-        py: 2,
-        boxShadow: `0px ${BANNER_SHADOW_HEIGHT}px 10px ${theme.palette.coolersNeutralInverted.main}`,
+        pt: { xs: 2, lg: 4 },
+        px: { xs: 2, lg: 0 },
         zIndex: Z_INDEX.WEBSITE_HEADER_BANNER,
+        backgroundColor: theme.palette.coolersNeutralInverted.main,
         flex: 0,
       }}
     >
-      <WebsiteHeader variant="medium" />
+      <Box
+        sx={{
+          // width: "100%",
+          p: 2,
+          pt: 1,
+          backgroundColor: theme.palette.coolersNeutralInvertedSecondary.main,
+          border: `1px solid ${theme.palette.coolersNeutralInvertedSecondary.light}`,
+          borderRadius: theme.spacing(1),
+        }}
+      >
+        <WebsiteHeader variant="medium" />
+      </Box>
     </Box>
   );
 }
