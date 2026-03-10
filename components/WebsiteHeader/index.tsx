@@ -85,13 +85,26 @@ function WebsiteHeaderMedium({ pathname }: { pathname: string }) {
                 alignItems: "center",
               }}
             >
-              <Typography
-                variant="h3"
-                className="gradient-text"
-                fontFamily={majorMonoDisplay.style.fontFamily}
-              >
-                Agustin Forero
-              </Typography>
+              <>
+                <Typography
+                  variant={"h3"}
+                  className="gradient-text"
+                  fontFamily={majorMonoDisplay.style.fontFamily}
+                  textAlign="center"
+                  sx={{ display: { xs: "none", sm: "block" } }}
+                >
+                  Agustin Forero
+                </Typography>
+                <Typography
+                  variant={"h5"}
+                  className="gradient-text"
+                  fontFamily={majorMonoDisplay.style.fontFamily}
+                  textAlign="center"
+                  sx={{ display: { xs: "block", sm: "none" } }}
+                >
+                  Agustin Forero
+                </Typography>
+              </>
             </Box>
           </Link>
         </Box>
@@ -127,6 +140,7 @@ function WebsiteHeaderMedium({ pathname }: { pathname: string }) {
               variant="h3"
               className="gradient-text"
               fontFamily={majorMonoDisplay.style.fontFamily}
+              textAlign="center"
             >
               Agustin Forero
             </Typography>

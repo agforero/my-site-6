@@ -20,12 +20,12 @@ export default function WebsiteHeaderBanner() {
     >
       <Box
         sx={{
-          // width: "100%",
           p: 2,
           pt: 1,
           backgroundColor: theme.palette.coolersNeutralInvertedSecondary.main,
           border: `1px solid ${theme.palette.coolersNeutralInvertedSecondary.light}`,
           borderRadius: theme.spacing(1),
+          width: { xs: "100%", md: "fit-content" },
         }}
       >
         <WebsiteHeader variant="medium" />

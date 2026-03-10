@@ -136,6 +136,15 @@ export const theme = createTheme({
       default: COOLERS_NEUTRAL_INVERTED,
     },
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 1000,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
   components: {
     MuiButton: {
       styleOverrides: {
