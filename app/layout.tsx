@@ -22,7 +22,7 @@ export default function RootLayout({
           <div className="layout">
             <main>{children}</main>
             <footer className="footer">
-              {/* TODO: add Toolbar here */}
+              {/* TODO: add Tooltip here */}
               <div className="footer-icon-container">
                 <Avatar sx={{ height: 24, width: 24 }}>
                   <Image
