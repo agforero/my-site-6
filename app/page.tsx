@@ -28,6 +28,7 @@ export default function Home() {
             sm: `1px solid ${theme.palette.coolersNeutralInvertedSecondary.light}`,
           },
           borderRadius: theme.spacing(1),
+          boxShadow: theme.shadows[15],
         }}
       >
         <WebsiteHeader variant="large" />

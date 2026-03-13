@@ -24,6 +24,7 @@ export default function WebsiteHeaderBanner() {
           pt: 1,
           backgroundColor: theme.palette.coolersNeutralInvertedSecondary.main,
           border: `1px solid ${theme.palette.coolersNeutralInvertedSecondary.light}`,
+          boxShadow: theme.shadows[15],
           borderRadius: theme.spacing(1),
           width: { xs: "100%", md: "fit-content" },
         }}

@@ -32,8 +32,8 @@ const COOLERS_GREEN_1 = "#679436";
 const COOLERS_GREEN_2 = "#a5be00";
 const COOLERS_NEUTRAL = "#ebf2fa";
 const COOLERS_NEUTRAL_SECONDARY = "#a0a0a0";
-const COOLERS_NEUTRAL_INVERTED = "#101010";
-const COOLERS_NEUTRAL_INVERTED_SECONDARY = "#161616";
+const COOLERS_NEUTRAL_INVERTED = "#212121";
+const COOLERS_NEUTRAL_INVERTED_SECONDARY = "#2c2c2c";
 
 const { palette, spacing } = createTheme();
 const { augmentColor } = palette;
