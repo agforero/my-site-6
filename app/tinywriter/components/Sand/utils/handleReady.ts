@@ -1,21 +1,49 @@
 import Matter from "matter-js";
-import { SAND_WIDTH } from "./constants";
+import { MIN_SAND_PARTICLE_SIZE, SAND_WIDTH } from "./constants";
 
-export const defaultBoxArgs: Parameters<typeof Matter.Bodies.rectangle> = [
+const getDefaultBoxArgs = (): Parameters<typeof Matter.Bodies.rectangle> => [
   Math.random() * SAND_WIDTH,
-  50,
-  80,
-  80,
+  -50,
+  Math.max(Math.random() * 25, MIN_SAND_PARTICLE_SIZE),
+  Math.max(Math.random() * 25, MIN_SAND_PARTICLE_SIZE),
 ];
 
-export function addSandParticle(world: Matter.World, boxArgs = defaultBoxArgs) {
-  function handleKeyDown(event: KeyboardEvent) {
-    const box = Matter.Bodies.rectangle(...boxArgs);
-    Matter.World.add(world, box);
-    if (event.code !== "Space") {
+const getDefaultPolygonArgs = (): Parameters<typeof Matter.Bodies.polygon> => [
+  Math.random() * SAND_WIDTH,
+  -50,
+  Math.max(Math.ceil(Math.random() * 8), 3),
+  Math.max(Math.random() * 20, MIN_SAND_PARTICLE_SIZE),
+];
+
+type addSandParticleBaseArgs = {
+  world: Matter.World;
+};
+type addSandParticleArgs = addSandParticleBaseArgs &
+  (
+    | {
+        type: "box";
+        params?: Parameters<typeof Matter.Bodies.rectangle>;
+      }
+    | {
+        type: "polygon";
+        params?: Parameters<typeof Matter.Bodies.polygon>;
+      }
+  );
+
+export function addSandParticle(args: addSandParticleArgs) {
+  const { type, world, params } = args;
+  switch (type) {
+    case "box": {
+      const box = Matter.Bodies.rectangle(...(params || getDefaultBoxArgs()));
+      Matter.World.add(world, box);
+      return;
+    }
+    case "polygon": {
+      const polygon = Matter.Bodies.polygon(
+        ...(params || getDefaultPolygonArgs()),
+      );
+      Matter.World.add(world, polygon);
       return;
     }
   }
-
-  window.addEventListener("keydown", handleKeyDown);
 }

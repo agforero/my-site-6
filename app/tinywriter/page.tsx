@@ -50,20 +50,33 @@ worth taking a look at https://brm.io/matter-js/
 
 import { Box, Container, Divider, TextField } from "@mui/material";
 import Matter from "matter-js";
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import Sand from "./components/Sand";
 import { addSandParticle } from "./components/Sand/utils/handleReady";
 
 export default function TinyWriter() {
   const [text, setText] = useState<string>("");
+
+  const engineRef = useRef<Matter.Engine | null>(null);
   const worldRef = useRef<Matter.World | null>(null);
+  const worldPausedTimeoutRef = useRef<number | null>(null);
+
+  const onSandReady = useCallback(
+    (engine: Matter.Engine, world: Matter.World) => {
+      engineRef.current = engine;
+      worldRef.current = world;
+    },
+    [],
+  );
 
   const addSand = () => {
     if (!worldRef.current) {
       return;
     }
-    console.log("adding sand");
-    addSandParticle(worldRef.current);
+    addSandParticle({
+      type: "polygon",
+      world: worldRef.current,
+    });
   };
 
   return (
@@ -80,12 +93,29 @@ export default function TinyWriter() {
           <TextField
             variant="outlined"
             onChange={(e) => {
+              // unpause the World
+              if (worldPausedTimeoutRef.current) {
+                clearTimeout(worldPausedTimeoutRef.current);
+                if (engineRef.current) {
+                  engineRef.current.timing.timeScale = 1;
+                  // engineRef.current.enabled = true;
+                  // engineRef.current.gravity.scale = 0.001;
+                }
+              }
+              worldPausedTimeoutRef.current = window.setTimeout(() => {
+                if (engineRef.current) {
+                  engineRef.current.timing.timeScale = 0;
+                  // engineRef.current.enabled = false;
+                  // engineRef.current.gravity.scale = -0.00001;
+                }
+              }, 5000);
+
+              // set text and place particle
               setText((prevText: string) => {
                 if (prevText === "" && e.target.value !== "") {
                   addSand();
                   return e.target.value;
                 }
-
                 const prevWordCount = prevText.trim().split(" ");
                 const newWordCount = e.target.value.trim().split(" ");
                 if (newWordCount.length > prevWordCount.length) {
@@ -104,11 +134,7 @@ export default function TinyWriter() {
           sx={{ borderColor: "white" }}
         />
         <Box sx={{ flex: 1, display: "flex", alignItems: "center" }}>
-          <Sand
-            onReady={(world) => {
-              worldRef.current = world;
-            }}
-          />
+          <Sand onReady={onSandReady} />
         </Box>
       </Box>
     </Container>

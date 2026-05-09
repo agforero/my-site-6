@@ -1,9 +1,9 @@
 import Matter from "matter-js";
 import { useEffect, useRef } from "react";
-import { SAND_WIDTH } from "./utils/constants";
+import { SAND_HEIGHT, SAND_WIDTH } from "./utils/constants";
 
 interface SandProps {
-  onReady: (world: Matter.World) => void;
+  onReady: (engine: Matter.Engine, world: Matter.World) => void;
 }
 
 export default function Sand({ onReady }: SandProps) {
@@ -19,24 +19,47 @@ export default function Sand({ onReady }: SandProps) {
       engine,
       options: {
         width: SAND_WIDTH,
-        height: 600,
+        height: SAND_HEIGHT,
         wireframes: false,
         background: "#111",
       },
     });
 
     // create floor
-    const floor = Matter.Bodies.rectangle(0, 580, 810, 40, {
+    const floor = Matter.Bodies.rectangle(0, SAND_HEIGHT, SAND_WIDTH * 2, 20, {
       isStatic: true,
+      render: {
+        fillStyle: "black",
+      },
     });
 
     // create walls
-    // const wall = Matter.Bodies.rectangle();
+    const wallLeft = Matter.Bodies.rectangle(0, 0, 20, SAND_HEIGHT * 2, {
+      isStatic: true,
+      render: {
+        fillStyle: "black",
+      },
+    });
 
+    const wallRight = Matter.Bodies.rectangle(
+      SAND_WIDTH,
+      0,
+      20,
+      SAND_HEIGHT * 2,
+      {
+        isStatic: true,
+        render: {
+          fillStyle: "black",
+        },
+      },
+    );
+
+    Matter.World.add(engine.world, wallLeft);
+    Matter.World.add(engine.world, wallRight);
     Matter.World.add(engine.world, floor);
 
     // fire callback so parent can add objects
-    onReady(engine.world);
+    onReady(engine, engine.world);
 
     // start engine
     Matter.Render.run(render);
