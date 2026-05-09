@@ -48,29 +48,23 @@ worth taking a look at https://brm.io/matter-js/
 
 */
 
-import { Box, Container, Divider, TextField, useTheme } from "@mui/material";
-import { useEffect, useState } from "react";
-import Minimap from "./components/Minimap";
+import { Box, Container, Divider, TextField } from "@mui/material";
+import Matter from "matter-js";
+import { useRef, useState } from "react";
+import Sand from "./components/Sand";
+import { addSandParticle } from "./components/Sand/utils/handleReady";
 
 export default function TinyWriter() {
-  const theme = useTheme();
-  const [text, setText] = useState("");
+  const [text, setText] = useState<string>("");
+  const worldRef = useRef<Matter.World | null>(null);
 
-  const handleUserKeyPress = (event: KeyboardEvent) => {
-    const { key } = event;
-
-    if (key === "space") {
-      console.log("hello");
+  const addSand = () => {
+    if (!worldRef.current) {
+      return;
     }
+    console.log("adding sand");
+    addSandParticle(worldRef.current);
   };
-
-  useEffect(() => {
-    window.addEventListener("keydown", handleUserKeyPress);
-
-    return () => {
-      window.removeEventListener("keydown", handleUserKeyPress);
-    };
-  });
 
   return (
     <Container
@@ -85,7 +79,21 @@ export default function TinyWriter() {
         <Box sx={{ flex: 8, display: "flex", alignItems: "center" }}>
           <TextField
             variant="outlined"
-            onChange={(e) => setText(e.target.value)}
+            onChange={(e) => {
+              setText((prevText: string) => {
+                if (prevText === "" && e.target.value !== "") {
+                  addSand();
+                  return e.target.value;
+                }
+
+                const prevWordCount = prevText.trim().split(" ");
+                const newWordCount = e.target.value.trim().split(" ");
+                if (newWordCount.length > prevWordCount.length) {
+                  addSand();
+                }
+                return e.target.value;
+              });
+            }}
             sx={{ input: { color: "white" }, width: "100%" }}
           />
         </Box>
@@ -96,7 +104,11 @@ export default function TinyWriter() {
           sx={{ borderColor: "white" }}
         />
         <Box sx={{ flex: 1, display: "flex", alignItems: "center" }}>
-          <Minimap text={text} />
+          <Sand
+            onReady={(world) => {
+              worldRef.current = world;
+            }}
+          />
         </Box>
       </Box>
     </Container>
