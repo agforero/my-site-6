@@ -1,14 +1,16 @@
 import Matter from "matter-js";
 import { MIN_SAND_PARTICLE_SIZE, SAND_WIDTH } from "./constants";
 
-const getDefaultBoxArgs = (): Parameters<typeof Matter.Bodies.rectangle> => [
-  Math.random() * SAND_WIDTH,
-  -50,
-  Math.max(Math.random() * 25, MIN_SAND_PARTICLE_SIZE),
-  Math.max(Math.random() * 25, MIN_SAND_PARTICLE_SIZE),
-];
+export const getDefaultBoxArgs = (): Parameters<
+  typeof Matter.Bodies.rectangle
+> => {
+  const size = Math.max(Math.random() * 25, MIN_SAND_PARTICLE_SIZE);
+  return [Math.random() * SAND_WIDTH, -50, size, size];
+};
 
-const getDefaultPolygonArgs = (): Parameters<typeof Matter.Bodies.polygon> => [
+export const getDefaultPolygonArgs = (): Parameters<
+  typeof Matter.Bodies.polygon
+> => [
   Math.random() * SAND_WIDTH,
   -50,
   Math.max(Math.ceil(Math.random() * 8), 3),
