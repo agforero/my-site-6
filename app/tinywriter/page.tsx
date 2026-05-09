@@ -1,3 +1,5 @@
+"use client";
+
 /*
 
 tinywriter: you can only type a little of your text at a time.
@@ -42,12 +44,16 @@ in fact, the user might be warned that "part of the fun is not knowing".
 I have to find a way for some animations to convey that their words
 are not limited. think of ways to animate cycles.
 
+worth taking a look at https://brm.io/matter-js/
+
 */
 
-import { TextField, Typography } from "@mui/material";
+import { Box, Container, Divider, TextField, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
+import Minimap from "./components/Minimap";
 
 export default function TinyWriter() {
+  const theme = useTheme();
   const [text, setText] = useState("");
 
   const handleUserKeyPress = (event: KeyboardEvent) => {
@@ -67,9 +73,32 @@ export default function TinyWriter() {
   });
 
   return (
-    <>
-      <TextField variant="outlined" onChange={(e) => setText(e.target.value)} />
-      <Typography sx={{ fontSize: "1px" }}>{text}</Typography>
-    </>
+    <Container
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100%",
+      }}
+    >
+      <Box sx={{ display: "flex", width: "100%", gap: 2 }}>
+        <Box sx={{ flex: 8, display: "flex", alignItems: "center" }}>
+          <TextField
+            variant="outlined"
+            onChange={(e) => setText(e.target.value)}
+            sx={{ input: { color: "white" }, width: "100%" }}
+          />
+        </Box>
+        <Divider
+          orientation="vertical"
+          variant="middle"
+          flexItem
+          sx={{ borderColor: "white" }}
+        />
+        <Box sx={{ flex: 1, display: "flex", alignItems: "center" }}>
+          <Minimap text={text} />
+        </Box>
+      </Box>
+    </Container>
   );
 }
